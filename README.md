@@ -15,6 +15,7 @@ Currently, there are only GET routes. Information that needs to be edited will o
 * `/animals`
   * Returns all the animals in the nearby vicinity by default using geolocation in the server side (through the IP address)
   * Optional Parameters
+    * city
     * zipcode
     * limit (Default: 50)
     * page
@@ -29,6 +30,7 @@ Currently, there are only GET routes. Information that needs to be edited will o
     
 * `/shelters/`
   * Optional Parameters
+    * city
     * zipcode
     * limit (Default: 50)
     * page
