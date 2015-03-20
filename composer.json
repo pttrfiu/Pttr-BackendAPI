@@ -2,8 +2,7 @@
     "name": "pttrfiu/pttr-backend",
     "description": "Pttr's official backend that is used internally for our web and mobile apps to aggregate shelter and stray animal data together under one house, as well as provide a convenient and unified public API for developers to create custom solutions.",
     "require": {
-        "badphp/dispatch": "8.0.3",
-        "rmccue/requests": "1.6.1"
+        "badphp/dispatch": "8.0.3"
     },
     "license": "Apache",
     "authors": [
@@ -19,5 +18,10 @@
             "name": "Kennet Postigo",
             "email": "kennetfpostigo@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "classmap": [
+            "Pttr"
+        ]
+    }
 }
