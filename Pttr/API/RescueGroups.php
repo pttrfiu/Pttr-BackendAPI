@@ -4,10 +4,11 @@ namespace Pttr\API;
 
 class RescueGroups implements APIable {
     
-    private $url = "https://api.rescuegroups.org/http/";
- 
+    private $url = "https://api.rescuegroups.org/http/json";
+    private $apiKey;
+    
     public function __construct($login) {
-        
+        $this->apiKey = $login['key'];
     }
     
     public function getShelters() {
@@ -23,6 +24,14 @@ class RescueGroups implements APIable {
     }
     
     public function getAnimal($identifier) {
+        
+    }
+    
+    private function constructParameters($config) {
+        
+    }
+    
+    private function fireRequest() {
         
     }
     
