@@ -88,11 +88,16 @@ class APICall {
     */
     private function combineResponse($methodName, $methodArguments = array()) {
         $responseSet = array();
-        if (!isset($_GET['city']) 
+        // City/Zipcode not set? Use our IP address location auto-detecting server-side feature!
+        if ((!isset($_GET['city']) || !isset($_GET['zipcode'])) 
             && $this->geoBunch instanceof \Pttr\Utility\Intelocation\Intelocationable
             && ($this->geoBunch->getCity() != "-" || $this->geoBunch->getState() != "-")
         ) {
             $_GET['city'] = $this->geoBunch->getCity() . "," . $this->geoBunch->getState();
+        }
+        // Set default GET parameters if they have not been set
+        if (!isset($_GET['limit'])) {
+            $_GET['limit'] = 25;
         }
         // For each API service that we have, call the requested method and pass arguments through
         foreach ($this->apiBunch as $apiService) {
