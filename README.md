@@ -5,8 +5,8 @@ as well as general data of various shelters and stray animals under one systemat
 
 This backend API layer:
 
-* Powers Pttr's web and mobile apps to aggregate stray animals as well as animal shelters that are currently no on the system
-* Allows other developers to create custom apps by hooking up to this JSON API layer without any restrictions
+* Powers Pttr's web and mobile apps to aggregate stray animals as well as animal shelters that are NOT currently on the system.
+* Allows other developers to create custom apps by hooking up to this JSON API layer without any restrictions.
 
 ## Developer Documentation
 
