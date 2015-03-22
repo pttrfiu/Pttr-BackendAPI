@@ -1,2 +1,2 @@
 vendor/*
-.apikeys.php
+.config.php
