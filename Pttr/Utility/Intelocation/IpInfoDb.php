@@ -48,7 +48,18 @@ class IpInfoDb implements Intelocationable {
             $this->apiUrl = 'http://api.ipinfodb.com/v3/ip-city/?key=' 
                 . $apiLogin['key']
                 . '&ip=' . $this->ip . '&format=json';
-            $this->intelocation = json_decode(file_get_contents($this->apiUrl), true);
+            
+            $curl = curl_init();
+            curl_setopt ($curl, CURLOPT_URL, $this->apiUrl);
+            curl_setopt ($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt ($curl, CURLOPT_CONNECTTIMEOUT, 30);
+            $contents = curl_exec($curl);
+            curl_close($curl);
+            $output = json_decode($contents, true);
+            
+            if (is_array($output)) {
+                $this->intelocation = $output;
+            }
         }
     }
     
@@ -59,9 +70,65 @@ class IpInfoDb implements Intelocationable {
         return '';
     }
     
+    public function getStateAbbreviation($stateLongName) {
+        $states = array(
+            'Alabama'=>'AL',
+            'Alaska'=>'AK',
+            'Arizona'=>'AZ',
+            'Arkansas'=>'AR',
+            'California'=>'CA',
+            'Colorado'=>'CO',
+            'Connecticut'=>'CT',
+            'Delaware'=>'DE',
+            'Florida'=>'FL',
+            'Georgia'=>'GA',
+            'Hawaii'=>'HI',
+            'Idaho'=>'ID',
+            'Illinois'=>'IL',
+            'Indiana'=>'IN',
+            'Iowa'=>'IA',
+            'Kansas'=>'KS',
+            'Kentucky'=>'KY',
+            'Louisiana'=>'LA',
+            'Maine'=>'ME',
+            'Maryland'=>'MD',
+            'Massachusetts'=>'MA',
+            'Michigan'=>'MI',
+            'Minnesota'=>'MN',
+            'Mississippi'=>'MS',
+            'Missouri'=>'MO',
+            'Montana'=>'MT',
+            'Nebraska'=>'NE',
+            'Nevada'=>'NV',
+            'New Hampshire'=>'NH',
+            'New Jersey'=>'NJ',
+            'New Mexico'=>'NM',
+            'New York'=>'NY',
+            'North Carolina'=>'NC',
+            'North Dakota'=>'ND',
+            'Ohio'=>'OH',
+            'Oklahoma'=>'OK',
+            'Oregon'=>'OR',
+            'Pennsylvania'=>'PA',
+            'Rhode Island'=>'RI',
+            'South Carolina'=>'SC',
+            'South Dakota'=>'SD',
+            'Tennessee'=>'TN',
+            'Texas'=>'TX',
+            'Utah'=>'UT',
+            'Vermont'=>'VT',
+            'Virginia'=>'VA',
+            'Washington'=>'WA',
+            'West Virginia'=>'WV',
+            'Wisconsin'=>'WI',
+            'Wyoming'=>'WY'
+        );
+        return $states[$stateLongName];
+    }
+    
     public function getState() {
         if (array_key_exists('regionName', $this->intelocation)) {
-            return $this->intelocation['regionName'];   
+            return $this->getStateAbbreviation($this->intelocation['regionName']);   
         }
         return '';
     }
