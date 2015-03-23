@@ -24,6 +24,7 @@ It should also have a `dataApis` and `geoApis` property with corresponding login
 
 Pttr's API layer is highly advanced. It can accept multiple animal shelter and stray animal APIs and normalize them into one unified JSON API, primarily by using PHP's Reflection APIs. We currently support PetFinder and RescueGroup's APIs, but you can easily add and extend another API service simply by:
 
+* Implementing your own class that implements the APIable interface under the `Pttr/API` namespace and putting your respective class under the `Pttr\API` namespace.
 * Adding your API's class name under the `dataApis` property of the array returned by `.config.php`.
 * Specifying the API login details as an array that is the value of the API class name under the `dataAPIs` property. These login details are auto-injected as the first parameter in the constructor function of your custom API class, whenever an instance of that class is called, allowing you to have access to your stored login credentials
 
