@@ -89,7 +89,7 @@ class APICall {
     private function combineResponse($methodName, $methodArguments = array()) {
         $responseSet = array();
         // City/Zipcode not set? Use our IP address location auto-detecting server-side feature!
-        if ((!isset($_GET['city']) || !isset($_GET['zipcode'])) 
+        if ((!isset($_GET['city']) && !isset($_GET['zipcode'])) 
             && $this->geoBunch instanceof \Pttr\Utility\Intelocation\Intelocationable
             && ($this->geoBunch->getCity() != "-" || $this->geoBunch->getState() != "-")
         ) {
