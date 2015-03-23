@@ -31,20 +31,26 @@ map(404, function() {
 
 function processOutput($output = '', $status = 'ok', $message = '') {
     if ($status == 'ok' && is_array($output)) {
-        return json_encode(array(
+        $output = json_encode(array(
             'status' => 'ok',
             'message' => $message,
             'results' => $output,
             'count' => count($output)
         ));
     } else {
-        return json_encode(array(
+        $output = json_encode(array(
             'status' => $status,
             'message' => $message,
             'results' => $output,
             'count' => '0'
         ));
     }
+    
+    if (isset($_GET['callback'])) {
+        $output = $_GET['callback'] . '(' . $output . ')';
+    }
+    
+    return $output;
 }
 
 config('url', "http://localhost/pttrv2-backend/");
