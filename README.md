@@ -14,6 +14,19 @@ Currently, there are only GET routes. Information that needs to be edited will o
 
 For more information, make sure to check out our generously documented [developer docs](https://github.com/pttrfiu/Pttr-BackendAPI/wiki)!
 
+## Spinning up your own service
+
+If you want to implement Pttr's Backend API layer in your own server, make sure to have a `.config.php` file in the root of your project that returns an array. This array should have at minimum, a `baseUrl` index specifying the base url where you plan to run the API layer. 
+
+It should also have a `dataApis` and `geoApis` property with corresponding login information. A sample `.config.php` file has been included to show a sample of the structure.
+
+## Extending the API
+
+Pttr's API layer is highly advanced. It can accept multiple animal shelter and stray animal APIs and normalize them into one unified JSON API, primarily by using PHP's Reflection APIs. We currently support PetFinder and RescueGroup's APIs, but you can easily add and extend another API service simply by:
+
+* Adding your API's class name under the `dataApis` property of the array returned by `.config.php`.
+* Specifying the API login details as an array that is the value of the API class name under the `dataAPIs` property. These login details are auto-injected as the first parameter in the constructor function of your custom API class, whenever an instance of that class is called, allowing you to have access to your stored login credentials
+
 ## Technologies used
 * PHP (>= 5.4)
   * Composer for autoloading classes and dependency management
