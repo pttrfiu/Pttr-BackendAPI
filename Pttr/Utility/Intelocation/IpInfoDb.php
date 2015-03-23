@@ -71,6 +71,9 @@ class IpInfoDb implements Intelocationable {
     }
     
     public function getStateAbbreviation($stateLongName) {
+        if ($stateLongName == "-" || empty($stateLongName)) {
+            return "";   
+        }
         $states = array(
             'Alabama'=>'AL',
             'Alaska'=>'AK',
