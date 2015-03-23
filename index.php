@@ -5,6 +5,8 @@ require('vendor/autoload.php');
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=utf-8");
 
+$settings = (new \Pttr\Utility\Config())->getSettings();
+
 map('GET', '/animals', function() {
     $apiCall = new \Pttr\APICall();
     echo processOutput($apiCall->getAnimals());
@@ -53,7 +55,7 @@ function processOutput($output = '', $status = 'ok', $message = '') {
     return $output;
 }
 
-config('url', "http://localhost/pttrv2-backend/");
+config('url', $settings['baseUrl']);
 
 dispatch();
 
